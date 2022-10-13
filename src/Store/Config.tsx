@@ -18,8 +18,6 @@ export function setupStore(preloadedState?: PreloadedState<RootState>) {
   });
 }
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof rootReducer>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppStore = ReturnType<typeof setupStore>;
 export type AppDispatch = AppStore['dispatch'];

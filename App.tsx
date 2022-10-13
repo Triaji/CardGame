@@ -9,9 +9,8 @@
  */
 
 import React from 'react';
-import {StyleSheet} from 'react-native';
-import {Provider} from 'react-redux';
-import {setupStore} from '@store/Config';
+import { Provider } from 'react-redux';
+import { setupStore } from '@store/Config';
 import GameScreen from '@screens/Game';
 
 const App = () => {
@@ -21,11 +20,5 @@ const App = () => {
     </Provider>
   );
 };
-
-const styles = StyleSheet.create({
-  background: {
-    backgroundColor: '#000',
-  },
-});
 
 export default App;

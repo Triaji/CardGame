@@ -1,7 +1,7 @@
-import {createSlice} from '@reduxjs/toolkit';
-import {RootState} from '@store/Config';
+import { createSlice } from '@reduxjs/toolkit';
+import { RootState } from '@store/Config';
 
-interface StepState {
+export interface StepState {
   value: number;
 }
 
@@ -22,7 +22,7 @@ export const stepSlice = createSlice({
   },
 });
 
-export const {incrementStep, resetStep} = stepSlice.actions;
+export const { incrementStep, resetStep } = stepSlice.actions;
 
 export const selectStep = (state: RootState) => state.step.value;
 
