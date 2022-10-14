@@ -3,13 +3,15 @@ import { Text } from 'react-native';
 import Screen from '../Screen';
 import renderer from 'react-test-renderer';
 
-it('renders correctly', () => {
-  const tree = renderer
-    .create(
-      <Screen>
-        <Text>Test</Text>
-      </Screen>,
-    )
-    .toJSON();
-  expect(tree).toMatchSnapshot();
+describe('ScreenComponent', () => {
+  it('renders correctly', () => {
+    const tree = renderer
+      .create(
+        <Screen>
+          <Text>Test</Text>
+        </Screen>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });

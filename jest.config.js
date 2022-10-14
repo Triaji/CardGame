@@ -12,5 +12,4 @@ module.exports = {
       lines: 90,
     },
   },
-  coverageDirectory: '<rootDir>/reports/js',
 };

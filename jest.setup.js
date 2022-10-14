@@ -5,3 +5,6 @@ Animated.timing = () => ({
   start: () => jest.fn(),
   spring: () => jest.fn(),
 });
+
+Animated.sequence = () => jest.fn();
+Animated.spring = () => jest.fn();

@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
 import {
   Alert,
-  Button,
+  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -41,7 +41,7 @@ const GameScreen = () => {
   const cards = useAppSelector(selectCards);
   const dispatch = useAppDispatch();
 
-  const reset = () => {
+  const reset = useCallback(() => {
     const pairs = CARD_PAIRS_VALUE();
     dispatch(
       setCards(
@@ -54,11 +54,11 @@ const GameScreen = () => {
       ),
     );
     dispatch(resetStep());
-  };
+  }, [dispatch]);
 
   useEffect(() => {
     reset();
-  }, []);
+  }, [reset]);
 
   useEffect(() => {
     const pairs = [...cards];
@@ -82,11 +82,19 @@ const GameScreen = () => {
       ).length === 0
     ) {
       Alert.alert(
-        'Congrats!',
-        'You have successfully paired up all the cards!',
+        'Congratulations!',
+        `You have successfully paired up all the cards in ${step} steps!`,
+        [
+          {
+            text: 'Try another round',
+            onPress: () => {
+              reset();
+            },
+          },
+        ],
       );
     }
-  }, [cards, dispatch]);
+  }, [cards, dispatch, step, reset]);
 
   const renderCardGrid = useCallback(() => {
     const onPressCard = (card: CardState) => {
@@ -128,6 +136,7 @@ const GameScreen = () => {
 
   return (
     <Screen>
+      <StatusBar barStyle={'light-content'} />
       <View style={styles.headerContainer}>
         <View style={styles.resetContainer}>
           <TouchableOpacity
@@ -136,7 +145,7 @@ const GameScreen = () => {
             onPress={() => {
               Alert.alert(
                 'Are you sure?',
-                'You will lose your current game progress',
+                'You will lose your current game progress if you reset',
                 [
                   { text: 'No' },
                   {
@@ -166,7 +175,7 @@ const GameScreen = () => {
       <View style={styles.footerContainer}>
         <View style={styles.stepsContainer}>
           <Text style={styles.stepsText}>
-            {matchCounter()}/{cards.length}
+            MATCHED {matchCounter()}/{cards.length / 2}
           </Text>
         </View>
       </View>
@@ -181,7 +190,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonText: { fontFamily: 'Silkscreen-Regular' },
-  headerContainer: { height: 50, flexDirection: 'row', paddingHorizontal: 20 },
+  headerContainer: {
+    height: 50,
+    flexDirection: 'row',
+    paddingHorizontal: 20,
+    marginVertical: 10,
+  },
   resetContainer: { flex: 1 },
   stepsContainer: { flex: 3, alignItems: 'flex-end', padding: 5 },
   stepsText: {

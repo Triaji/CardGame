@@ -56,6 +56,8 @@ describe('GameScreen', () => {
       fireEvent.press(screen.getByTestId('button-reset'));
       jest.advanceTimersByTime(1000);
     });
+
+    expect(Alert.alert).toHaveBeenCalled();
   });
 
   it('should dispatch unflipCards', () => {

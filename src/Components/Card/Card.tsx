@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useCallback, useState } from 'react';
 import {
   Animated,
-  View,
   StyleSheet,
   Text,
   TouchableWithoutFeedback,
@@ -22,7 +21,6 @@ const Card = (props: Props) => {
   const [prevState, setPrevState] = useState<CardState>();
   const flip = useRef(new Animated.Value(0)).current;
   const shake = useRef(new Animated.Value(0)).current;
-  const grow = useRef(new Animated.Value(0)).current;
 
   const flipToFrontStyle = {
     transform: [
@@ -88,7 +86,7 @@ const Card = (props: Props) => {
         useNativeDriver: true,
       }),
       Animated.timing(shake, {
-        toValue: 0,
+        toValue: 1,
         duration: 100,
         useNativeDriver: true,
       }),
@@ -117,7 +115,7 @@ const Card = (props: Props) => {
     }
 
     setPrevState(card);
-  }, [card, flipToFront, flipToBack, shakeAnimation]);
+  }, [card, prevState, flipToFront, flipToBack, shakeAnimation]);
 
   return (
     <TouchableWithoutFeedback
