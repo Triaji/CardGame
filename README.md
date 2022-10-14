@@ -24,6 +24,9 @@ pod install
 yarn test
 ```
 
+- The coverage report will be generated on the `coverage` folder on the root of the project
+
+
 ## Linter
 
 - To run the linter do the following command on the root project directory
